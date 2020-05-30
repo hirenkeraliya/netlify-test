@@ -1,15 +1,19 @@
 // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
 const fileSystem = require('fs');
+const util = require('util');
 
-exports.handler = async (event, context) => {
+exports.handler = async (event, context, callback) => {
   try {
-    const newsletters = fileSystem.readFile('database/newsletters.json');
+    const getNewslettersFrom = util.promisify(fileSystem.readFile).bind(fileSystem);
+
     return {
       statusCode: 200,
       body: JSON.stringify({
-        newsletters: newsletters
+        newsletters: await getNewslettersFrom('./database/newsletters.json').then((requestResults) => {
+          return JSON.parse(requestResults);
+        })
       }),
-    }
+    };
   } catch (err) {
     return { statusCode: 500, body: err.toString() }
   }
