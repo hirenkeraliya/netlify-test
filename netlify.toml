@@ -10,3 +10,9 @@
   publish = "/"
 
   functions = "functions/"
+[production]
+  base = "/"
+
+  publish = "/"
+
+  functions = "functions/"
