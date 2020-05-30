@@ -1,0 +1,12 @@
+[build]
+  base = "/"
+
+  publish = "/"
+
+  functions = "functions/"
+[dev]
+  base = "/"
+
+  publish = "/"
+
+  functions = "functions/"
